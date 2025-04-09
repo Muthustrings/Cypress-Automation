@@ -1,0 +1,11 @@
+{
+    "label": "Run Cypress Tests",
+    "type": "shell",
+    "command": "npx cypress run",
+    "group": {
+      "kind": "build",
+      "isDefault": true
+    },
+    "problemMatcher": []
+  }
+  
