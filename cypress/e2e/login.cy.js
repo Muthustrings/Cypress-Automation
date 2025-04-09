@@ -309,5 +309,12 @@ describe('Login Test Cases', () => {
       cy.get('.oxd-button').click();
       cy.get('.oxd-alert-content > .oxd-text').should('have.text', 'Invalid credentials');
     })
-
+    it("Password contains percent sign", () => {
+      cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+      cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type('Admin');
+      cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type('admin123%456');
+      cy.get('.oxd-button').click();
+      cy.get('.oxd-alert-content > .oxd-text').should('have.text', 'Invalid credentials');
+    })
+    
   })
