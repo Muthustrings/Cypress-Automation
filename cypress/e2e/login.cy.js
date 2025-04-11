@@ -317,4 +317,4 @@ describe('Login Test Cases', () => {
       cy.get('.oxd-alert-content > .oxd-text').should('have.text', 'Invalid credentials');
     })
     
-  })
+  })  
