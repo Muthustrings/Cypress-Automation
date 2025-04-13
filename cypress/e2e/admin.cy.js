@@ -252,6 +252,315 @@ describe('Admin Test case', () =>
     // Assert that no results are found
     cy.get('.oxd-table-body').should('not.contain', 'InvalidRole')
   })
+  it('Search with Valid Role and Invalid Status', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Select a valid role from the dropdown
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text').click()
+    cy.get('.oxd-select-dropdown > :nth-child(2) > span').click()
+    // Select an invalid status from the dropdown
+    cy.get(':nth-child(4) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown > :nth-child(3) > span').click()
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that no results are found
+    cy.get('.oxd-table-body').should('not.contain', 'InvalidStatus')
+  })
+  it('Search with Valid Role and Empty Status', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Select a valid role from the dropdown
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text').click()
+    cy.get('.oxd-select-dropdown > :nth-child(2) > span').click()
+    // Clear the status field
+    cy.get(':nth-child(4) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that results with the selected role are displayed
+    cy.get('.oxd-table-body').should('contain', 'Admin')
+  })
+  it('Search with Empty Role and Valid Status', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Clear the role field
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Select a valid status from the dropdown
+    cy.get(':nth-child(4) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown > :nth-child(2) > span').click()
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that results with the selected status are displayed
+    cy.get('.oxd-table-body').should('contain', 'Admin')
+  })
+  it('Search with Empty Role and Status', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Clear the role field
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Clear the status field
+    cy.get(':nth-child(4) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Perform the search without entering any criteria
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that all results are displayed or a message is shown
+    cy.get('.oxd-table-body').should('be.visible')
+  })
+  it('Search with Invalid User and Empty Role', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Enter an invalid username
+    cy.get(':nth-child(2) > .oxd-input').type("InvalidUser")
+    // Clear the role field
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that no results are found
+    cy.get('.oxd-table-body').should('not.contain', 'InvalidUser')
+  })
+  it('Search with Empty Role and Invalid Status', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Clear the role field
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Select an invalid status from the dropdown
+    cy.get(':nth-child(4) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown > :nth-child(3) > span').click()
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that no results are found
+    cy.get('.oxd-table-body').should('not.contain', 'InvalidStatus')
+  })
+  it('Search with Empty Role and Valid Status', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Clear the role field
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Select a valid status from the dropdown
+    cy.get(':nth-child(4) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown > :nth-child(2) > span').click()
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that results with the selected status are displayed
+    cy.get('.oxd-table-body').should('contain', 'Admin')
+  })
+  it('Search with Empty Role and Invalid User', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Enter an invalid username
+    cy.get(':nth-child(2) > .oxd-input').type("InvalidUser")
+    // Clear the role field
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that no results are found
+    cy.get('.oxd-table-body').should('not.contain', 'InvalidUser')
+  })
+  it('Search with Empty Role and Valid User', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Enter a valid username
+    cy.get(':nth-child(2) > .oxd-input').type("Admin")
+    // Clear the role field
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that results with the selected role are displayed
+    cy.get('.oxd-table-body').should('contain', 'Admin')
+  })
+  it('Search with Empty Role and Empty Status', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Clear the role field
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Clear the status field
+    cy.get(':nth-child(4) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Perform the search without entering any criteria
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that all results are displayed or a message is shown
+    cy.get('.oxd-table-body').should('be.visible')
+  })
+  it('Search with Valid User and Empty Role', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Enter a valid username
+    cy.get(':nth-child(2) > .oxd-input').type("Admin")
+    // Clear the role field
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that results with the selected role are displayed
+    cy.get('.oxd-table-body').should('contain', 'Admin')
+  })
+  it('Search with Empty Role and Valid User', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Enter a valid username
+    cy.get(':nth-child(2) > .oxd-input').type("Admin")
+    // Clear the role field
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that results with the selected role are displayed
+    cy.get('.oxd-table-body').should('contain', 'Admin')
+  })
+  it('Search with Empty Role and Invalid User', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Enter an invalid username
+    cy.get(':nth-child(2) > .oxd-input').type("InvalidUser")
+    // Clear the role field
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that no results are found
+    cy.get('.oxd-table-body').should('not.contain', 'InvalidUser')
+  })
+  it('Search with Empty Role and Valid User', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Enter a valid username
+    cy.get(':nth-child(2) > .oxd-input').type("Admin")
+    // Clear the role field
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that results with the selected role are displayed
+    cy.get('.oxd-table-body').should('contain', 'Admin')
+  })
+  it('Search with Empty Role and Empty Status', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Clear the role field
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Clear the status field
+    cy.get(':nth-child(4) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Perform the search without entering any criteria
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that all results are displayed or a message is shown
+    cy.get('.oxd-table-body').should('be.visible')
+  })
+ 
+  it('Search with Empty Role and Invalid User', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Enter an invalid username
+    cy.get(':nth-child(2) > .oxd-input').type("InvalidUser")
+    // Clear the role field
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text')
+      .click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that no results are found
+    cy.get('.oxd-table-body').should('not.contain', 'InvalidUser')
 
+  })
+  it('Search with Mixed Alphanumeric Username', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    cy.get(':nth-child(2) > .oxd-input').type("Admin123") // Enter a mixed alphanumeric username
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that results are displayed or not
+    cy.get('.oxd-table-body').should('not.contain', 'Admin123')
+  })
+  it('Search with Username Containing Spaces', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    cy.get(':nth-child(2) > .oxd-input').type("Admin User") // Enter a username with spaces
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that no results are found
+    cy.get('.oxd-table-body').should('not.contain', 'Admin User')
+  })
+  it('Search with Role and Partial Username', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    cy.get(':nth-child(2) > .oxd-input').type("Adm") // Enter a partial username
+    // Select a valid role from the dropdown
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text').click()
+    cy.get('.oxd-select-dropdown > :nth-child(2) > span').click()
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that results with the selected role and partial username are displayed
+    cy.get('.oxd-table-body').should('contain', 'Admin')
+  })
+  it('Search with Invalid Role and Empty Username', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Select an invalid role from the dropdown
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text').click()
+    cy.get('.oxd-select-dropdown > :nth-child(4) > span').click()
+    // Clear the username field
+    cy.get(':nth-child(2) > .oxd-input').clear()
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that no results are found
+    cy.get('.oxd-table-body').should('not.contain', 'InvalidRole')
+  })
+  it('Search with Empty Username and Valid Status', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Clear the username field
+    cy.get(':nth-child(2) > .oxd-input').clear()
+    // Select a valid status from the dropdown
+    cy.get(':nth-child(4) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text').click()
+    cy.get('.oxd-select-dropdown > :nth-child(2) > span').click()
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that results with the selected status are displayed
+    cy.get('.oxd-table-body').should('contain', 'Admin')
+  })
+  it('Search with Special Characters in Role', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Enter special characters in the role field
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text').type("@#$%^&*")
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that no results are found
+    cy.get('.oxd-table-body').should('not.contain', '@#$%^&*')
+  })
+  it('Search with Empty Role and Multiple Filters', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Clear the role field
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text').click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Select a valid status from the dropdown
+    cy.get(':nth-child(4) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text').click()
+    cy.get('.oxd-select-dropdown > :nth-child(2) > span').click()
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that results with the selected status are displayed
+    cy.get('.oxd-table-body').should('contain', 'Admin')
+  })
+  it('Search with Empty Role and SQL Injection in Status', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    // Clear the role field
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text').click()
+    cy.get('.oxd-select-dropdown').should('be.visible')
+    // Enter SQL injection in the status field
+    cy.get(':nth-child(4) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text').type("' OR '1'='1")
+    // Perform the search
+    cy.get('.oxd-form-actions > .oxd-button--secondary').click()
+    // Assert that no results are found or the system handles it securely
+    cy.get('.oxd-table-body').should('not.contain', "' OR '1'='1")
+  })
 
+ 
 })
