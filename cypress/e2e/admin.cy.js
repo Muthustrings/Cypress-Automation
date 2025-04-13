@@ -561,6 +561,86 @@ describe('Admin Test case', () =>
     // Assert that no results are found or the system handles it securely
     cy.get('.oxd-table-body').should('not.contain', "' OR '1'='1")
   })
-
- 
+  it("Add Admin User ", () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    cy.get('.orangehrm-header-container > .oxd-button--secondary').click() // Click on Add button
+    cy.get(':nth-child(2) > .oxd-input').type("Admin") // Enter username
+    cy.get(':nth-child(3) > .oxd-input').type("admin123") // Enter password
+    cy.get(':nth-child(4) > .oxd-input').type("admin123") // Confirm password
+    cy.get('.oxd-form-actions > .oxd-button--primary').click() // Click on Save button
+    cy.get('.oxd-table-body').should('contain', 'Admin') // Assert that the user is added successfully
+  })
+it('Add Admin user empty', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    cy.get('.orangehrm-header-container > .oxd-button--secondary').click() // Click on Add button
+    cy.get('.oxd-form-actions > .oxd-button--primary').click() // Click on Save button
+    cy.get('.oxd-alert-content > .oxd-text').should('contain', 'Required') // Assert that the error message is shown
+})
+  it('Add Admin user with invalid username', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    cy.get('.orangehrm-header-container > .oxd-button--secondary').click() // Click on Add button
+    cy.get(':nth-child(2) > .oxd-input').type("Admin@123") // Enter invalid username
+    cy.get(':nth-child(3) > .oxd-input').type("admin123") // Enter password
+    cy.get(':nth-child(4) > .oxd-input').type("admin123") // Confirm password
+    cy.get('.oxd-form-actions > .oxd-button--primary').click() // Click on Save button
+    cy.get('.oxd-alert-content > .oxd-text').should('contain', 'Invalid username') // Assert that the error message is shown
+  })
+  it('Add Admin user with invalid password', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    cy.get('.orangehrm-header-container > .oxd-button--secondary').click() // Click on Add button
+    cy.get(':nth-child(2) > .oxd-input').type("Admin") // Enter username
+    cy.get(':nth-child(3) > .oxd-input').type("admin@123") // Enter invalid password
+    cy.get(':nth-child(4) > .oxd-input').type("admin123") // Confirm password
+    cy.get('.oxd-form-actions > .oxd-button--primary').click() // Click on Save button
+    cy.get('.oxd-alert-content > .oxd-text').should('contain', 'Invalid password') // Assert that the error message is shown
+  })
+  it('Add Admin user with invalid confirm password', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    cy.get('.orangehrm-header-container > .oxd-button--secondary').click() // Click on Add button
+    cy.get(':nth-child(2) > .oxd-input').type("Admin") // Enter username
+    cy.get(':nth-child(3) > .oxd-input').type("admin123") // Enter password
+    cy.get(':nth-child(4) > .oxd-input').type("admin@123") // Confirm password
+    cy.get('.oxd-form-actions > .oxd-button--primary').click() // Click on Save button
+    cy.get('.oxd-alert-content > .oxd-text').should('contain', 'Password mismatch') // Assert that the error message is shown
+  })
+  it('Add Admin user with valid data', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    cy.get('.orangehrm-header-container > .oxd-button--secondary').click() // Click on Add button
+    cy.get(':nth-child(2) > .oxd-input').type("Admin") // Enter username
+    cy.get(':nth-child(3) > .oxd-input').type("admin123") // Enter password
+    cy.get(':nth-child(4) > .oxd-input').type("admin123") // Confirm password
+    cy.get('.oxd-form-actions > .oxd-button--primary').click() // Click on Save button
+    cy.get('.oxd-table-body').should('contain', 'Admin') // Assert that the user is added successfully
+  })
+  it('Delete Admin user', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    cy.get('.oxd-table-body').contains('Admin').parents('tr').find('.oxd-icon-button').click() // Click on delete button
+    cy.get('.oxd-button--label-danger').click() // Confirm deletion
+    cy.get('.oxd-table-body').should('not.contain', 'Admin') // Assert that the user is deleted successfully
+  })
+  it('Delete Admin user with confirmation', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    cy.get('.oxd-table-body').contains('Admin').parents('tr').find('.oxd-icon-button').click() // Click on delete button
+    cy.get('.oxd-button--label-danger').click() // Confirm deletion
+    cy.get('.oxd-table-body').should('not.contain', 'Admin') // Assert that the user is deleted successfully
+  })
+  it('Delete Admin user with cancel', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    cy.get('.oxd-table-body').contains('Admin').parents('tr').find('.oxd-icon-button').click() // Click on delete button
+    cy.get('.oxd-button--label-danger').click() // Confirm deletion
+    cy.get('.oxd-table-body').should('not.contain', 'Admin') // Assert that the user is deleted successfully
+  })
+  it('Delete Admin user with invalid confirmation', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    cy.get('.oxd-table-body').contains('Admin').parents('tr').find('.oxd-icon-button').click() // Click on delete button
+    cy.get('.oxd-button--label-danger').click() // Confirm deletion
+    cy.get('.oxd-table-body').should('not.contain', 'Admin') // Assert that the user is deleted successfully
+  })
+  it('Delete Admin user with valid confirmation', () => {
+    cy.get(':nth-child(1) > .oxd-main-menu-item > .oxd-text').click() // Navigate to Admin section
+    cy.get('.oxd-table-body').contains('Admin').parents('tr').find('.oxd-icon-button').click() // Click on delete button
+    cy.get('.oxd-button--label-danger').click() // Confirm deletion
+    cy.get('.oxd-table-body').should('not.contain', 'Admin') // Assert that the user is deleted successfully
+  })
+  
 })
